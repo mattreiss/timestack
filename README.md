@@ -1,8 +1,8 @@
 # Remotion video
 
 <p align="center">
-  <video width="1280" height="1940" controls>
-    <source src="./public/videos/video.mp4" type="video/mp4">
+  <video width="640" height="970" controls>
+    <source src="https://github.com/mattreiss/timestack/raw/main/public/videos/video.mp4" type="video/mp4">
   Your browser does not support the video tag.
   </video>
 </p>
