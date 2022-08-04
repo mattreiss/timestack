@@ -75,7 +75,8 @@ def main(directory, fps, stack_length):
   width, height = get_dimensions('{}/{}'.format(directory, files[0]))
   input['width'] = width
   input['height'] = height
-  shutil.rmtree('./public/images')
+  if os.path.exists('./public/images'):
+    shutil.rmtree('./public/images')
   os.makedirs('./public/images')
   for i, filename in enumerate(files):
     src = '{}/{}'.format(directory, filename)

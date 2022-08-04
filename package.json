@@ -6,7 +6,8 @@
     "start": "remotion preview --props='./input.json' src/index.tsx",
     "build": "remotion render --props='./input.json' --timeout 480000 src/index.tsx Images out/video.mp4",
     "upgrade": "remotion upgrade",
-    "test": "eslint src --ext ts,tsx,js,jsx && tsc"
+    "test": "eslint src --ext ts,tsx,js,jsx && tsc",
+    "render": "./timelapse.sh"
   },
   "repository": {},
   "license": "UNLICENSED",
