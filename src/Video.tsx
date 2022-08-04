@@ -1,16 +1,24 @@
-import {Composition} from 'remotion';
-import {MyComposition} from './Composition';
+import {Composition, getInputProps} from 'remotion';
+import Images from './Images';
 
 export const RemotionVideo: React.FC = () => {
+  let { 
+    fps,
+		width,
+		height,
+		durationInFrames
+  } = getInputProps();
 	return (
 		<>
 			<Composition
-				id="MyComp"
-				component={MyComposition}
-				durationInFrames={60}
-				fps={30}
-				width={1280}
-				height={720}
+				id="Images"
+				component={Images}
+				{...{
+					fps,
+					width,
+					height,
+					durationInFrames
+				}}
 			/>
 		</>
 	);

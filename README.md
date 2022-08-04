@@ -1,9 +1,10 @@
 # Remotion video
 
 <p align="center">
-  <a href="https://github.com/remotion-dev/logo">
-    <img src="https://github.com/remotion-dev/logo/raw/main/withtitle/element-0.png">
-  </a>
+  <video width="1280" height="1940" controls>
+    <source src="./public/videos/video.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+  </video>
 </p>
 
 Welcome to your Remotion project!
@@ -25,7 +26,7 @@ yarn start
 **Render video**
 
 ```console
-yarn build
+./timelapse.sh -D <directory> -FPS <fps> -S <stack_length>
 ```
 
 **Upgrade Remotion**
