@@ -1,13 +1,10 @@
 # Remotion video
 
-<p align="center">
-  <video width="1280" height="1940" controls>
-    <source src="./public/videos/video.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-  </video>
-</p>
-
 Welcome to your Remotion project!
+
+
+https://user-images.githubusercontent.com/11970016/182906972-0cac2c93-f868-46ef-a723-85cf340bfeda.mp4
+
 
 ## Commands
 
