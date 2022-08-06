@@ -12,6 +12,7 @@
   "repository": {},
   "license": "UNLICENSED",
   "dependencies": {
+    "@mattreiss/glfx": "^1.0.9",
     "@remotion/cli": "^3.0.0",
     "@remotion/eslint-config": "^3.0.0",
     "eslint": "^8.14.0",

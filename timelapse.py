@@ -62,7 +62,7 @@ def get_dimensions(filepath):
 
   return to_even(w), to_even(h)
 
-def main(directory, fps, stack_length):
+def main(directory, fps, stack_length, effect):
   input = get_input()
   files = load_image_files(directory)
   input['fps'] = int(fps)
@@ -75,6 +75,7 @@ def main(directory, fps, stack_length):
   width, height = get_dimensions('{}/{}'.format(directory, files[0]))
   input['width'] = width
   input['height'] = height
+  input['effect'] = effect
   if os.path.exists('./public/images'):
     shutil.rmtree('./public/images')
   os.makedirs('./public/images')
@@ -92,5 +93,6 @@ if __name__ == '__main__':
   parser.add_argument("-D", "--directory", required=True, help="directory containing images")
   parser.add_argument("-FPS", "--fps", required=False, default=24, help="fps for video")
   parser.add_argument("-S", "--stack_length", required=False, default=1, help="length to stack images")
+  parser.add_argument("-E", "--effect", required=False, default='lighten', help="effect to apply to images")
   args = parser.parse_args()
-  main(args.directory, args.fps, args.stack_length)
+  main(args.directory, args.fps, args.stack_length, args.effect)

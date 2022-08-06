@@ -1,8 +1,9 @@
 import {Composition, getInputProps} from 'remotion';
+import Effects from './Effects';
 import Images from './Images';
 
 export const RemotionVideo: React.FC = () => {
-  let { 
+  const { 
     fps,
 		width,
 		height,
@@ -13,6 +14,17 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="Images"
 				component={Images}
+				{...{
+					fps,
+					width,
+					height,
+					durationInFrames
+				}}
+			/>
+
+			<Composition
+				id="Effects"
+				component={Effects}
 				{...{
 					fps,
 					width,
