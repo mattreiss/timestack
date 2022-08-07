@@ -1,4 +1,4 @@
-import {Composition, Folder, getInputProps} from 'remotion';
+import { Composition, Folder, getInputProps } from 'remotion';
 import ImageEffects from './compositions/Effects/ImageEffects';
 import VideoEffects from './compositions/Effects/VideoEffects';
 import FramesToVideo from './compositions/Convert/FramesToVideo';
@@ -8,18 +8,18 @@ import Slice from './compositions/Stack/Slice';
 import StackImages from './compositions/Stack/StackImages';
 
 export const RemotionVideo: React.FC = () => {
-  const { 
-    fps,
+	const {
+		fps,
 		width,
 		height,
 		durationInFrames
-  } = getInputProps();
-	const props = { 
-    fps,
+	} = getInputProps();
+	const props = {
+		fps,
 		width,
 		height,
 		durationInFrames
-  };
+	};
 	return (
 		<>
 			<Folder name="Stack">
@@ -42,7 +42,7 @@ export const RemotionVideo: React.FC = () => {
 					{...props}
 				/>
 			</Folder>
-		
+
 			<Folder name="Effects">
 				{/** apply effects to images */}
 				<Composition
@@ -58,7 +58,7 @@ export const RemotionVideo: React.FC = () => {
 					{...props}
 				/>
 			</Folder>
-			
+
 			<Folder name="Convert">
 				{/** render frames as video */}
 				<Composition
