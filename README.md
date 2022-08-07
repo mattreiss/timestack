@@ -4,8 +4,7 @@ Create stacked timelapse videos from a sequence of photos.
 
 Example output:
 
-
-https://user-images.githubusercontent.com/11970016/182906972-0cac2c93-f868-46ef-a723-85cf340bfeda.mp4
+![video](https://user-images.githubusercontent.com/11970016/183280641-3fe2e261-0ac3-45fd-92fd-827708743db9.gif)
 
 
 ## Commands
