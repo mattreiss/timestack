@@ -1,6 +1,5 @@
 import { Video, staticFile, useVideoConfig, AbsoluteFill } from "remotion";
 
-
 const VideoToFrames = () => {
   const {
     width, 
