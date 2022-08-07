@@ -1,13 +1,18 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { applyEffects } from '@mattreiss/glfx';
-import { Video, useCurrentFrame, staticFile, useVideoConfig, getInputProps, AbsoluteFill } from "remotion";
+import { Video, useCurrentFrame, staticFile, useVideoConfig, AbsoluteFill, delayRender, continueRender, spring } from "remotion";
 
-
-const Effects = () => {
+const VideoEffects = () => {
   const video = useRef<HTMLVideoElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
-  const { width, height } = useVideoConfig();
   const frame = useCurrentFrame();
+  const { 
+    durationInFrames, 
+    width, 
+    height,
+    fps
+  } = useVideoConfig();
+  const [handle] = useState(() => delayRender());
 
   // Process a frame
   const onVideoFrame = useCallback(() => {
@@ -19,18 +24,38 @@ const Effects = () => {
     if (!context) {
       return;
     }
+    const percent = frame / durationInFrames;
 
+    const angle = spring({
+      fps,
+      from: 0,
+      to:  -Math.PI * 2,
+      frame,
+      durationInFrames,
+    });
+    const radius = spring({
+      fps,
+      from: 0,
+      to: width / 3,
+      frame,
+      durationInFrames,
+    });
     const _canvas = applyEffects(video.current, [{
       swirl: {
-        center: [ width / 2, height / 2 ],
-        radius: width / 2,
-        angle: -Math.PI * 2,
+        center: [ width / 2, height / 3.5 ],
+        radius,
+        angle,
+      },
+      brightnessContrast: {
+          brightness: -0.1 * percent,
+          contrast:  0,
       }
     }]);
     _canvas.width = width;
     _canvas.height = height;
-    context.drawImage(video.current, 0, 0, width, height);
-  }, [height, width]);
+    context.drawImage(_canvas, 0, 0, width, height);
+    continueRender(handle);
+  }, [height, width, frame, durationInFrames, handle, fps]);
   
   // Synchronize the video with the canvas
   useEffect(() => {
@@ -59,14 +84,13 @@ const Effects = () => {
           ref={video}
           width={width}
           height={height}
-          // Hide the original video tag
           style={{ 
             opacity: 0,
             width,
             height
           }}
-          startFrom={300}
-          src={staticFile('/video/video.mp4')}
+          startFrom={0}
+          src={staticFile('/video.mp4')}
         />
       </AbsoluteFill>
       <AbsoluteFill>
@@ -80,4 +104,4 @@ const Effects = () => {
   )
 }
 
-export default Effects;
+export default VideoEffects;

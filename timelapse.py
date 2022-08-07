@@ -62,6 +62,11 @@ def get_dimensions(filepath):
 
   return to_even(w), to_even(h)
 
+def recreate_dir(path):
+  if os.path.exists(path):
+    shutil.rmtree(path)
+  os.makedirs(path)
+
 def main(directory, fps, stack_length, effect):
   input = get_input()
   files = load_image_files(directory)
@@ -76,9 +81,7 @@ def main(directory, fps, stack_length, effect):
   input['width'] = width
   input['height'] = height
   input['effect'] = effect
-  if os.path.exists('./public/images'):
-    shutil.rmtree('./public/images')
-  os.makedirs('./public/images')
+  recreate_dir('./public/images')
   for i, filename in enumerate(files):
     src = '{}/{}'.format(directory, filename)
     dst = f'./public/images/{i}.{ext}'

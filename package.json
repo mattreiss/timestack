@@ -4,7 +4,15 @@
   "description": "My Remotion video",
   "scripts": {
     "start": "remotion preview --props='./input.json' src/index.tsx",
-    "build": "remotion render --props='./input.json' --timeout 480000 src/index.tsx Images out/video.mp4",
+    "build:StackImagesToFrames": "remotion render --props='./input.json' --timeout 1280000 src/index.tsx StackImages public/frames --sequence",
+    "build:StackImagesToVideo": "remotion render --props='./input.json' --timeout 1280000 src/index.tsx StackImages public/video.mp4",
+    "build:ImageEffectsToVideo": "remotion render --props='./input.json' --timeout 1280000 src/index.tsx ImageEffects public/final.mp4 --concurrency 1",
+    "build:VideoEffectsToVideo": "remotion render --props='./input.json' --timeout 1280000 src/index.tsx VideoEffects public/final.mp4 --concurrency 1 --browser-executable \"$CHROME_EXECUTABLE_PATH\"",
+    "build:FramesToVideo": "remotion render --props='./input.json' --timeout 480000 src/index.tsx FramesToVideo public/final.mp4",
+    "build:VideoToFrames": "remotion render --props='./input.json' --timeout 480000 src/index.tsx VideoToFrames public/frames --sequence --concurrency 1 --browser-executable \"$CHROME_EXECUTABLE_PATH\"",
+    "build:FramesToGif": "remotion render --props='./input.json' --timeout 480000 src/index.tsx FramesToVideo public/final.gif --codec=gif --every-nth-frame=2",
+    "build:VideoToGif": "remotion render --props='./input.json' --timeout 480000 src/index.tsx VideoToFrames public/final.gif --codec=gif --every-nth-frame=2 --concurrency 1 --browser-executable \"$CHROME_EXECUTABLE_PATH\"",
+    "build": "yarn build:StackImagesToVideo && yarn build:VideoEffectsToVideo && yarn build:VideoToGif",
     "upgrade": "remotion upgrade",
     "test": "eslint src --ext ts,tsx,js,jsx && tsc",
     "render": "./timelapse.sh"
