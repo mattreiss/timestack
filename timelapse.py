@@ -116,13 +116,13 @@ def main(directory, fps, stack_length, effect, _width, _height, animation, stack
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
   parser.add_argument("-D", "--directory", required=True, help="directory containing images")
-  parser.add_argument("-FPS", "--fps", required=False, default=24, help="fps for video")
+  parser.add_argument("-FPS", "--fps", required=False, default=60, help="fps for video")
   parser.add_argument("-S", "--stack_length", required=False, default=1, help="length to stack images")
-  parser.add_argument("-W", "--width", required=False, default=720, help="width of output")
+  parser.add_argument("-W", "--width", required=False, default=900, help="width of output")
   parser.add_argument("-H", "--height", required=False, default=-1, help="height of output")
   parser.add_argument("-E", "--effect", required=False, default='lighten', help="effect to apply to images")
-  parser.add_argument("-M", "--mode", required=False, default='reverse-lighten', help="stack mode to apply to images")
-  parser.add_argument("-A", "--animation", required=False, default='zoom-in', help="effect to apply to images")
+  parser.add_argument("-M", "--mode", required=False, default='lighten', help="stack mode to apply to images")
+  parser.add_argument("-A", "--animation", required=False, default='none', help="effect to apply to images")
   args = parser.parse_args()
   main(
     args.directory, 

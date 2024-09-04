@@ -25,20 +25,22 @@ const FramesToVideo = () => {
   let w = width;
   let h = height;
 
-  const _frame = durationInFrames - frame;
+  const pct = 0.5;
+  const deltaFromEnd = (durationInFrames - frame) * pct;
+  const deltaFromStart = frame * pct;
 
   switch (animation) {
     case "zoom-in":
-      x -= frame;
-      w = width + frame + frame;
+      x -= deltaFromStart;
+      w = width + deltaFromStart + deltaFromStart;
       h = w * height / width;
-      y -= frame;
+      y -= deltaFromStart;
       break;
     case "zoom-out":
-      x -= _frame;
-      w = width + _frame + _frame;
+      x -= deltaFromEnd;
+      w = width + deltaFromEnd + deltaFromEnd;
       h = w * height / width;
-      y -= _frame;
+      y -= deltaFromEnd;
       break;
     default:
       break;
@@ -54,7 +56,7 @@ const FramesToVideo = () => {
           width: w,
           height: h,
         }}
-        src={staticFile(`/frames/element-${getFrameString()}.png`)}
+        src={staticFile(`/frames/element-${getFrameString()}.jpeg`)}
       />
     </AbsoluteFill>
   )
