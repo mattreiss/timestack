@@ -6,7 +6,6 @@ import VideoToFrames from './compositions/Convert/VideoToFrames';
 import Lighten from './compositions/Stack/Lighten';
 import Slice from './compositions/Stack/Slice';
 import StackImages from './compositions/Stack/StackImages';
-import ReverseLighten from './compositions/Stack/ReverseLighten';
 
 export const RemotionVideo: React.FC = () => {
 	const {
@@ -14,7 +13,12 @@ export const RemotionVideo: React.FC = () => {
 		width,
 		height,
 		durationInFrames
-	} = getInputProps();
+	} = getInputProps<{
+		fps: number;
+		width: number;
+		height: number;
+		durationInFrames: number;
+	}>();
 	const props = {
 		fps,
 		width,
@@ -28,12 +32,6 @@ export const RemotionVideo: React.FC = () => {
 				<Composition
 					id="Lighten"
 					component={Lighten}
-					{...props}
-				/>
-				{/** stack images together with lighten blendMode */}
-				<Composition
-					id="ReverseLighten"
-					component={ReverseLighten}
 					{...props}
 				/>
 				{/** stack images together by slices */}

@@ -1,1 +1,1 @@
-{"path": "/images", "prefix": "", "start": 0, "ext": "jpg", "stackLength": 90, "fps": 60, "width": 1920, "height": 2880, "durationInFrames": 291, "stackMode": "reverse-lighten", "effect": "lighten", "animation": "zoom-out"}
+{"path": "/images", "prefix": "", "start": 0, "ext": "jpg", "stackLength": 90, "fps": 60, "width": 720, "height": 1080, "durationInFrames": 291, "stackMode": "reverse-lighten", "effect": "lighten", "animation": "zoom-out"}

@@ -1,7 +1,6 @@
 import { getInputProps } from "remotion";
 import Lighten from "./Lighten";
 import Slice from "./Slice";
-import ReverseLighten from "./ReverseLighten";
 
 const StackImages: React.FC = () => {
   const { stackMode } = getInputProps();
@@ -9,7 +8,7 @@ const StackImages: React.FC = () => {
     case 'slice':  return <Slice />;
     case 'lighten': return <Lighten />;
     case 'reverse-lighten':
-    default: return <ReverseLighten />;
+    default: return <Lighten isReverse />;
   }
 };
 

@@ -4,7 +4,7 @@
   "description": "My Remotion video",
   "scripts": {
     "start": "remotion preview --props='./input.json' src/index.tsx",
-    "build:StackImagesToFrames": "remotion render --props='./input.json' --timeout 1280000 src/index.tsx StackImages public/frames --sequence",
+    "build:StackImagesToFrames": "remotion render --props='./input.json' --timeout 1280000 src/index.tsx StackImages public/frames --sequence --concurrency 1 --image-format=jpeg --jpeg-quality=100 --bundle-cache=false --log=verbose --browser-executable \"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\"",
     "build:StackImagesToVideo": "remotion render --props='./input.json' --timeout 1280000 src/index.tsx StackImages public/video.mp4",
     "build:ImageEffectsToVideo": "remotion render --props='./input.json' --timeout 1280000 src/index.tsx ImageEffects public/tmp.mp4 --concurrency 1 && mv public/tmp.mp4 public/video.mp4",
     "build:VideoEffectsToVideo": "remotion render --props='./input.json' --timeout 1280000 src/index.tsx VideoEffects public/tmp.mp4 --concurrency 1 --browser-executable \"$CHROME_EXECUTABLE_PATH\" && mv public/tmp.mp4 public/video.mp4",
@@ -15,7 +15,8 @@
     "build": "yarn build:StackImagesToFrames && yarn build:FramesToVideo",
     "upgrade": "remotion upgrade",
     "test": "eslint src --ext ts,tsx,js,jsx && tsc",
-    "render": "./timelapse.sh"
+    "render": "./timelapse.sh",
+    "photoshop": "./photoshop-scripts/bash/photoshop.sh"
   },
   "repository": {},
   "license": "UNLICENSED",
