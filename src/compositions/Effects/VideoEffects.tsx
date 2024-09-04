@@ -41,14 +41,27 @@ const VideoEffects = () => {
       durationInFrames,
     });
     const _canvas = applyEffects(video.current, [{
-      swirl: {
-        center: [ width / 2, height / 3.5 ],
-        radius,
-        angle,
-      },
+      // Swirl: {
+      //   center: [ width / 2, height / 3.5 ],
+      //   radius,
+      //   angle,
+      // },
       brightnessContrast: {
           brightness: -0.1 * percent,
           contrast:  0,
+      },
+      tiltShift : {
+        startX : 0,
+        startY : height * 0.65,
+        endX : width,
+        endY : height * 0.65,
+        blurRadius : 15,
+        gradientRadius : height / 2,
+      },
+      bulgePinch: {
+        center: [ width / 2, height / 2 ],
+        radius: width,
+        strength: 0.5
       }
     }]);
     _canvas.width = width;

@@ -12,7 +12,7 @@
     "build:VideoToFrames": "remotion render --props='./input.json' --timeout 480000 src/index.tsx VideoToFrames public/frames --sequence --concurrency 1 --browser-executable \"$CHROME_EXECUTABLE_PATH\"",
     "build:FramesToGif": "remotion render --props='./input.json' --timeout 480000 src/index.tsx FramesToVideo public/video.gif --codec=gif --every-nth-frame=2",
     "build:VideoToGif": "remotion render --props='./input.json' --timeout 480000 src/index.tsx VideoToFrames public/video.gif --codec=gif --every-nth-frame=2 --concurrency 1 --browser-executable \"$CHROME_EXECUTABLE_PATH\"",
-    "build": "yarn build:StackImagesToVideo && yarn build:VideoEffectsToVideo && yarn build:VideoToGif",
+    "build": "yarn build:StackImagesToFrames && yarn build:FramesToVideo",
     "upgrade": "remotion upgrade",
     "test": "eslint src --ext ts,tsx,js,jsx && tsc",
     "render": "./timelapse.sh"
@@ -21,13 +21,13 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@mattreiss/glfx": "^1.0.9",
-    "@remotion/cli": "^3.0.0",
-    "@remotion/eslint-config": "^3.0.0",
+    "@remotion/cli": "^4.0.208",
+    "@remotion/eslint-config": "^4.0.208",
     "eslint": "^8.14.0",
     "prettier": "^2.6.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "remotion": "^3.0.0",
+    "remotion": "^4.0.208",
     "typescript": "4.6.3"
   },
   "devDependencies": {

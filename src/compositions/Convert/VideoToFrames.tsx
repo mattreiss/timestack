@@ -15,7 +15,7 @@ const VideoToFrames = () => {
           height
         }}
         startFrom={0}
-        src={staticFile('/video.mp4')}
+        src={staticFile('/arthur.mp4')}
       />
     </AbsoluteFill>
   )

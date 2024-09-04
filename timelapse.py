@@ -40,8 +40,9 @@ def set_input(data):
   with open(INPUT_JSON, 'w') as f:
     json.dump(data, f)
 
-def to_even(n):
-  while n % 2 != 0:
+def to_even(number):
+  n = int(number)
+  if n % 2 != 0:
     n -= 1
   return n
 
@@ -56,36 +57,57 @@ def get_dimensions(filepath):
 
   w = img.width
   h = img.height
-  if exif[orientation] == 6 or exif[orientation] == 8:
-    h = img.width
-    w = img.height
+  if exif is not None and orientation is not None and orientation in exif:
+    if exif[orientation] == 6 or exif[orientation] == 8:
+      h = img.width
+      w = img.height
 
   return to_even(w), to_even(h)
+
+
+def resize_img(path, width, height):
+  w = to_even(width)
+  h = to_even(height)
+  img = Image.open(path)
+  out = img.resize((w, h))
+  out.save(path)
+
 
 def recreate_dir(path):
   if os.path.exists(path):
     shutil.rmtree(path)
   os.makedirs(path)
 
-def main(directory, fps, stack_length, effect):
+def main(directory, fps, stack_length, effect, _width, _height, animation, stackMode):
   input = get_input()
   files = load_image_files(directory)
   input['fps'] = int(fps)
   input['stackLength'] = int(stack_length)
+  input['stackMode'] = stackMode
   input['start'] = 0
   input['prefix'] = ''
   ext = files[0].split('.')[-1]
   input['ext'] = ext
   input['durationInFrames'] = len(files)
   width, height = get_dimensions('{}/{}'.format(directory, files[0]))
-  input['width'] = width
-  input['height'] = height
+  w = width
+  h = height
+  if _width > 0:
+    h = height * _width / width
+    w = _width
+  elif _height > 0:
+    w = width * _height / height
+    h = _height
+  input['width'] = to_even(w)
+  input['height'] = to_even(h)
   input['effect'] = effect
+  input['animation'] = animation
   recreate_dir('./public/images')
   for i, filename in enumerate(files):
     src = '{}/{}'.format(directory, filename)
     dst = f'./public/images/{i}.{ext}'
     shutil.copyfile(src, dst)
+    resize_img(dst, w, h)
   set_input(input)
   subprocess.run(["yarn", "build"])
   
@@ -96,6 +118,18 @@ if __name__ == '__main__':
   parser.add_argument("-D", "--directory", required=True, help="directory containing images")
   parser.add_argument("-FPS", "--fps", required=False, default=24, help="fps for video")
   parser.add_argument("-S", "--stack_length", required=False, default=1, help="length to stack images")
+  parser.add_argument("-W", "--width", required=False, default=1920, help="width of output")
+  parser.add_argument("-H", "--height", required=False, default=-1, help="height of output")
   parser.add_argument("-E", "--effect", required=False, default='lighten', help="effect to apply to images")
+  parser.add_argument("-M", "--mode", required=False, default='reverse-lighten', help="stack mode to apply to images")
+  parser.add_argument("-A", "--animation", required=False, default='zoom-in', help="effect to apply to images")
   args = parser.parse_args()
-  main(args.directory, args.fps, args.stack_length, args.effect)
+  main(
+    args.directory, 
+    args.fps, 
+    args.stack_length, 
+    args.effect,
+    args.width,
+    args.height,
+    args.animation,
+    args.mode)

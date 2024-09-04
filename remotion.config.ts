@@ -1,8 +1,12 @@
-import {Config} from 'remotion';
 
-Config.Rendering.setImageFormat('jpeg');
-Config.Output.setOverwriteOutput(true);
-Config.Rendering.setQuality(100);
+import {Config} from "@remotion/cli/config";
 
-// Config.Rendering.setConcurrency(1);
+Config.setStillImageFormat('jpeg');
+Config.setOverwriteOutput(true);
+Config.setJpegQuality(100);
 
+Config.setConcurrency(1);
+Config.setDelayRenderTimeoutInMilliseconds(1280000);
+Config.setMuted(true);
+
+Config.setBrowserExecutable("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome");
